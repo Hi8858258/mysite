@@ -82,14 +82,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-database_password = os.environ['DATABASE_PASSWORD']
-print(database_password)
+#database_password = os.environ['DATABASE_PASSWORD']
+#print(database_password)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysite_db',
         'USER': 'like',
-        'PASSWORD': database_password,
+        'PASSWORD': '8858258lk',
         'HOST': 'localhost',
         'PORT': '3306',
     }
