@@ -1,5 +1,6 @@
 db.sqlite3
 settings.py
 data.json
-__.vscode__/
+.vscode/
 __pycache__/
+static_collected/
