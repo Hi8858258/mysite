@@ -1,8 +1,12 @@
 from django.shortcuts import render,get_object_or_404,HttpResponse
-from .models import Blog,BlogType,ReadNum
+from .models import Blog,BlogType#,ReadNum
 from django.db.models import Count
 from django.core.paginator import Paginator
 from datetime import datetime
+from django.contrib.contenttypes.models import ContentType
+from read_statistics.models import ReadNum
+from read_statistics.utils import read_statistics_once_read
+
 # Create your views here.
 
 blog_number_per_page = 10
@@ -35,27 +39,17 @@ def blog_list(request):
 
 def blog_detail(request, blog_pk):
     blog = get_object_or_404(Blog,pk = blog_pk)
-    if not request.COOKIES.get('blog_%s_read' %blog_pk):
-        if ReadNum.objects.filter(blog=blog).count():
-            #存在记录,就去寻找这条记录
-            readnum = ReadNum.objects.get(blog=blog)
-
-        else:
-            #不存在对应的记录，则创建这条记录
-            readnum = ReadNum(blog = blog)
-        #计数+1
-        readnum.read_num += 1
-        readnum.save()
+    read_cookie_key = read_statistics_once_read(request,blog)
 
     context = {}
-    blog = get_object_or_404(Blog,pk = blog_pk)
     previous_blog = Blog.objects.filter(pk__lt = blog_pk ).last()
     next_blog = Blog.objects.filter(pk__gt = blog_pk).first()
     context['blog'] = blog
     context['previous_blog'] = previous_blog
     context['next_blog'] =next_blog
+    context['user'] = request.user    #获取用户信息
     response = render(request, 'blog/blog_detail.html',context)   #相应
-    response.set_cookie('blog_%s_read' %blog_pk,'true',max_age=60)    #max_age,expires取一个用
+    response.set_cookie(read_cookie_key,'true',max_age=60)    #max_age,expires取一个用
     return response
 
 def blogs_with_type(request, blog_type_pk):

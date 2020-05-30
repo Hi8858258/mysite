@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    'blog',
+    'comment',
+    'read_statistics',
+    'like',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'user.context_processors.login_modal_form',
             ],
         },
     },
@@ -83,7 +88,6 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #     }
 # }
 database_password = os.environ['DATABASE_PASSWORD']
-print(database_password)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -119,13 +123,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -140,6 +144,25 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 #配置ckeditor的上传路径
 CKEDITOR_UPLOAD_PATH = 'upload/'
+
+CKEDITOR_CONFIGS = {
+    'default':{},
+    'comment_ckeditor':{
+        'toolbar':'custom',
+        'toolbar_custom':[
+            ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+            ["TextColor","BGColor","RemoveFormat"],
+            ['NumberedList','BulletedList'],
+            ['Link','Unlink'],
+            ["Smiley","SpecialChar","Blockquote"],
+        ],
+        'width':'auto',
+        'height':'180',
+        'tabSpaces':4,
+        'removePlugins':'elementspath',
+        'resize_enabled':False,
+    }
+}
 
 # #发送邮件设置
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -182,3 +205,11 @@ CKEDITOR_UPLOAD_PATH = 'upload/'
 #         # },
 #     },
 # }
+#缓存设置
+#数据库缓存
+CACHES={
+    'default':{
+        'BACKEND':'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION':'my_cache_table',
+    }
+}
