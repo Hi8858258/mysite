@@ -5,3 +5,11 @@
 ul.blog-date{
     list-style-type: none;
 }
+
+div.navbar-default{
+    background-color: #fff;
+    border-color: #f0f0f0;
+}
+div.blog-body{
+    background-color: #f9f9f9;
+}

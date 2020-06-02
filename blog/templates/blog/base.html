@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/base.css">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/base.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
     {% block header_extends %}{% endblock %}
     <title>{% block title%}{% endblock %}</title>
 </head>
 <body>
-    <div class="navbar navbar-default" role="navigation">
+    <!-- 全局顶部导航栏 -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'home'%}">个人博客网站</a>
+                <a class="navbar-brand" href="{% url 'home'%}">FalschCoder</a>
                 <button class="navbar-toggle collapsed" data-target="#navbar-collapse" data-toggle="collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -47,7 +48,9 @@
             </div>
         </div>
     </div>
+    <div class="blog-body">
     {% block content %}{% endblock %}
+    </div>
     <!-- Modal 模态登入框-->
     <div class="modal fade" id="login_modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
