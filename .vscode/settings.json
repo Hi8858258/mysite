@@ -1,3 +1,19 @@
 {
-    "python.pythonPath": "D:\\Desktop\\My_env\\env\\Scripts\\python.exe"
+    "python.pythonPath": "D:\\Desktop\\My_env\\env\\Scripts\\python.exe",
+    "sqltools.connections": [
+        {
+            "askForPassword": false,
+            "database": "mysite_db",
+            "driver": "MySQL",
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "name": "mysite",
+            "password": "8858258lk",
+            "port": 3306,
+            "previewLimit": 50,
+            "server": "localhost",
+            "username": "like"
+        }
+    ]
 }
