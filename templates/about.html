@@ -1,0 +1,26 @@
+{% extends 'blog/base.html'%}
+{% block header_extends %}<link rel="stylesheet" href="/static/about.css">{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h3 class="aside-title">
+            <span class="aside-title">About Me</span>
+        </h3>
+        <hr >
+        <div class="picture" style="text-align: center;">
+            <img class="img-circle" src="/media/profile/个人资料.jpg" alt="呀，开发者不知道去哪啦">
+            <img class="img-thumbnail" src="/media/profile/微信二维码.png" alt="开发者的二维码走丢了">
+        </div>
+        <div class="panel-body information">
+            <ul class="">
+                <!-- <li></li> -->
+                <p>一个喜欢编程的化工狗</p>
+                <p>擅长：python django以及未来能学会的技术</p>
+                <p>毕业于:<a href="https://www.ovgu.de/">OVGU</a>一所安静的德意志高校</P>
+                <p></p>
+                <p>欢迎想交流技术的同学加我微信</p>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

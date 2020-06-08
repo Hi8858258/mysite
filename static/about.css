@@ -1,0 +1,18 @@
+
+h3.aside-title{
+    text-align: center;
+}
+img.img-circle{
+    width: 15%;
+}
+img.img-thumbnail{
+    width: 15%;
+    margin-left: 100px;
+}
+div.picture{
+    margin-left: 10px;
+}
+div.information{
+    margin-top: 100px;
+    text-align: center;
+}

@@ -1,0 +1,74 @@
+{% extends 'blog/blog_list.html' %}
+{% load comment_tags %}
+{% load like_tags %}
+{% block tag %}
+<div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+    {% for blog in blogs %}
+    <div class="panel panel-default for-blog">      
+        <div class="panel-body">  
+            <div class="blog">
+                <h3>
+                    <a href="{% url 'blog:blog_detail' blog.pk%}">
+                        {{ blog.title }}
+                    </a>
+                </h3>
+                <p class="blog-info">
+                    <span class="glyphicon glyphicon-tag" style="color: brown;"></span>
+                    <span>
+                        <a href="{% url 'blog:blogs_with_type' blog.blog_type.pk%}">{{blog.blog_type}}</a>
+                    </span>
+                    &nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-time" style="color:cornflowerblue;"></span>
+                    <span>{{blog.created_time|date:"Y-m-d"}}</span>
+                    &nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-eye-open" style="color: gray;"></span>
+                    <span>{{blog.get_read_num}}</span>
+                    &nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-comment" style="color:lightskyblue;"></span>
+                    <span>{% get_comment_count blog %}</span>
+                    &nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-thumbs-up" style="color: lightcoral;"></span>
+                    <span>{% get_like_count blog %}</span>
+                </p>
+                <p>{{ blog.content|striptags|truncatechars:120|safe}}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="blog">
+        <h3>--暂无博客 ，敬请期待--</h3>
+    </div>
+    {% endfor %}
+    <div class="paginator" aria-label="Page navigation">
+        {% if page_of_blogs.has_other_pages %}
+            <ul class="pagination">
+                <li>
+                    {% if page_of_blogs.has_previous %}
+                    <a href="?page={{page_of_blogs.previous_page_number}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    {% else %}
+                    <span aria-hidden="true">&laquo;</span>
+                    {% endif %}    
+                </li>
+                {% for page_num in page_range %}
+                {% if page_num == page_of_blogs.number %}
+                    <li class="active"><span>{{page_num}}</span></li>
+                {% else%}
+                    <li><a href="?page={{page_num}}">{{page_num}}</a></li>
+                {% endif %}
+                {% endfor %}
+                <li>
+                {% if page_of_blogs.has_next %}
+                    <a href="?page={{page_of_blogs.next_page_number}}" aria-label="Previous">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                {% else %}
+                    <span aria-hidden="true">&raquo;</span>
+                    {% endif %}
+                </li>
+            </ul>
+        {% endif %}
+    </div> 
+</div>
+{% endblock %}

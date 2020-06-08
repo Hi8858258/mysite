@@ -6,7 +6,10 @@ div.blog:not(:last-child){
     padding-bottom: 1em;
     border-bottom: 1px solid #eeeeee;
 }
-
+div.aside-right{
+    position: fixed;
+    width: 11%;
+}
 ul.blog-info-description{
     list-style-type: none;
     margin-bottom: 2em;
@@ -43,14 +46,33 @@ div.reply{
     margin-left: 2em;
 }
 
+div.aside-left{
+    position: fixed;
+    top: 200px;
+}
 div.like {
-    color: #337ab7;
+    width: 48px;
+    height: 48px;
+    margin-top: 100px;
+    color:grey;
     cursor: pointer;
     display: inline-block;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+ 
+    cursor: pointer;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 1px 5px 5px rgba(0,0,0,.25);
+
 }
 
 div.like .active {
-    color: #f22;
+    color: #ec7259;
 }
 
 div.paginator{
@@ -75,7 +97,8 @@ span.aside-title{
     margin-top: 18px;
 }
 h3 {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 div.panel-body{
     padding-top: 0px;
@@ -86,9 +109,51 @@ div.line{
     margin: 16px 0;
     background-color: #eeeeee;
 }
-div.row{
-    margin-top: 65px;
-}
+
 div.type-class{
     margin-left: -20px;
 }
+
+h3.section-title{
+    padding-left: 30%;
+}
+
+h3.section-title span{
+    padding: 4px 15px;
+    position: relative;
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-weight: 600;
+    background: #fff;
+}
+img.img-circle{
+    width: 50px;
+    position: relative;
+    margin-left: 10px;
+
+}
+
+span.glyphicon-class{
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+}
+
+div.type-right{
+    float: right;
+}
+
+span.glyphicon-fire{
+    color: #ec7259;
+}
+div.for-blog:hover{
+    cursor: pointer;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 1px 5px 5px rgba(0,0,0,.25);
+}
+div.type-class:hover{
+    cursor: pointer;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 1px 5px 5px rgba(0,0,0,.25);
+}
+
+

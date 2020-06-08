@@ -23,7 +23,7 @@ class Blog(models.Model,ReadNumExpandMethod):
     def __str__(self):
         return "<Blog title: %s>" %self.title
     class Meta:
-        ordering = ['id']
+        ordering = ['-created_time']
 
 
 

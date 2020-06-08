@@ -2,14 +2,42 @@
     margin: 0;
     padding: 0;
 }
+html,body{
+    width: 100%;
+    height: 100%;
+}
 ul.blog-date{
     list-style-type: none;
 }
-
+body{
+    background-color: #f9f9f9;
+    height: 100%;
+}
+a{
+    color: black;
+}
 div.navbar-default{
     background-color: #fff;
     border-color: #f0f0f0;
 }
 div.blog-body{
     background-color: #f9f9f9;
+}
+div.container-fluid{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+div.navbar-fixed-top{
+    background-color: black;
+}
+a.header-tag{
+    color: white!important;
+}
+div.panel-footer{
+    text-align: center;
+    color:#fff;
+    background-color: #000;
+    width: 100%;
+    bottom: 0;
+    position: relative;
 }

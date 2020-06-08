@@ -27,6 +27,7 @@ urlpatterns = [
     path('comment/',include('comment.urls')),
     path('like/',include('like.urls')),
     path('user/',include('user.urls')),
+    path('about/', views.about, name='about')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

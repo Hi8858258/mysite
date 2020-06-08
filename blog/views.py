@@ -27,23 +27,23 @@ def get_blog_list_common_data(blogs_all_list,request):
     context['blogs'] = page_of_blogs.object_list
     context['page_of_blogs'] = page_of_blogs          #页码浏览器
     context['blog_types'] = BlogType.objects.annotate(blog_count = Count('blog'))    #这里有个问题，前端直接使用blog_type.blog_count，是因为实例属性会找父类的属性
-    context['blog_dates'] = Blog.objects.dates('created_time','day',order = "DESC")
+    context['blog_dates'] = Blog.objects.dates('created_time','month',order = "DESC")
     return context
-
-
 
 def blog_list(request):
     blog_all_list = Blog.objects.all()
     context = get_blog_list_common_data(blog_all_list,request)
+    context['title'] = '最新文章'
     return render(request,'blog/blog_list.html',context)
 
 def blog_detail(request, blog_pk):
     blog = get_object_or_404(Blog,pk = blog_pk)
+    created_time = blog.created_time
     read_cookie_key = read_statistics_once_read(request,blog)
 
     context = {}
-    previous_blog = Blog.objects.filter(pk__lt = blog_pk ).last()
-    next_blog = Blog.objects.filter(pk__gt = blog_pk).first()
+    previous_blog = Blog.objects.filter(created_time__gt = created_time ).last()
+    next_blog = Blog.objects.filter(created_time__lt = created_time).first()
     context['blog'] = blog
     context['previous_blog'] = previous_blog
     context['next_blog'] =next_blog
@@ -53,15 +53,20 @@ def blog_detail(request, blog_pk):
     return response
 
 def blogs_with_type(request, blog_type_pk):
+    url_info = request.path_info.split('/')
     blog_type = get_object_or_404(BlogType, pk = blog_type_pk)
     blog_all_list_with_type = Blog.objects.filter(blog_type = blog_type)
     context = get_blog_list_common_data(blog_all_list_with_type,request)
     context['blog_type'] = blog_type
-    return render(request,'blog/blogs_with_type.html',context)
+    if '2' in url_info:
+        context['title'] = '技术人生'
+    elif '1' in url_info:
+        context['title'] = '生活随笔'
+    return render(request,'blog/blog_newest.html',context)
 
 def blogs_with_date(request,year,month):
     blog_all_list_with_date = Blog.objects.filter(created_time__year = year,created_time__month = month)
     context = get_blog_list_common_data(blog_all_list_with_date,request)
+    context['title'] = '%s月文章' %month
     context['blogs_with_date'] = '%s年%s月' %(year,month)
-    context['blog_dates'] = Blog.objects.dates('created_time','day',order = "DESC")
-    return render(request,'blog/blogs_with_date.html',context)  
+    return render(request,'blog/blog_newest.html',context)
